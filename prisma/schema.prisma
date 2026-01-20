@@ -1,0 +1,96 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model Usuario{
+  usu_id Int @id @default(autoincrement())
+  usu_nome String
+  usu_email String @unique
+  usu_senha String
+
+  pap_id Int
+  papel Papel @relation(fields: [pap_id], references: [pap_id])
+}
+
+model Papel{
+  pap_id Int @id @default(autoincrement())
+  pap_tipo String
+
+  usuario Usuario[]
+}
+
+model Produto{
+  prd_id Int @id @default(autoincrement())
+  prd_nome String
+  prd_quantidade Int 
+  prd_preco Float
+}
+
+model Atendimento{
+  ate_id Int @id @default(autoincrement())
+  ate_data DateTime
+  ate_valortotal Float
+
+  pet_id Int
+  pets Pets @relation(fields: [pet_id], references: [pet_id])
+
+  ser_id Int
+  servico Servico @relation(fields: [ser_id], references: [ser_id])
+}
+
+model Servico{
+  ser_id Int @id @default(autoincrement())
+  ser_nome String
+  ser_preco Float
+
+  atendimento Atendimento[]
+}
+
+model Pets{
+  pet_id Int @id @default(autoincrement())
+  pet_nome String
+  pet_idade Int
+
+  cli_id Int
+  cliente Cliente @relation(fields: [cli_id], references: [cli_id])
+
+  esp_id Int 
+  especie Especie @relation(fields: [esp_id], references: [esp_id])
+
+  rac_id Int
+  raca Raca @relation(fields: [rac_id], references: [rac_id])
+
+  atendimento Atendimento[]
+}
+
+model Especie{
+  esp_id Int @id @default(autoincrement())
+  esp_nome String @unique
+
+  pet Pets[]
+}
+
+model Raca{
+  rac_id Int @id @default(autoincrement())
+  rac_nome String @unique
+
+  pet Pets[]
+}
+
+
+model Cliente{
+  cli_id Int @id @default(autoincrement())
+  cli_nome String
+  cli_telefone String
+  cli_email String @unique
+
+  pet Pets[]
+}
+
