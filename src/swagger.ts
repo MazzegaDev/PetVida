@@ -41,9 +41,9 @@ const doc = {
          especie: {
             esp_nome: "Nome",
          },
-         especieAlter:{
+         especieAlter: {
             esp_id: 1,
-            esp_nome: "nome"
+            esp_nome: "nome",
          },
          racaAlter: {
             rac_id: 1,
@@ -65,6 +65,21 @@ const doc = {
          baixaEstoque: {
             prd_id: 1,
             prd_quantidade: 10,
+         },
+         pet: {
+            pet_nome: "Nome",
+            pet_idade: 1,
+            cli_id: 1,
+            esp_id: 1,
+            rac_id: 1,
+         },
+         petAlter: {
+            pet_id: 1,
+            pet_nome: "Nome",
+            pet_idade: 1,
+            cli_id: 1,
+            esp_id: 1,
+            rac_id: 1,
          },
       },
    },

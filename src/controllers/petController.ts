@@ -11,6 +11,22 @@ export default class PetController {
 
    async createPet(req: Request, res: Response): Promise<Response> {
       try {
+         const { pet_nome, pet_idade, cli_id, esp_id, rac_id } =
+            req.body as ICreatePetDTO;
+
+         const data: ICreatePetDTO = {
+            pet_nome,
+            pet_idade,
+            cli_id,
+            esp_id,
+            rac_id,
+         };
+
+         const createdPet: Pets = await this.pServ.createPet(data);
+
+         return res
+            .status(201)
+            .json({ msg: "Pet criado com sucesso", data: createdPet });
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {
@@ -23,6 +39,9 @@ export default class PetController {
 
    async listPets(req: Request, res: Response): Promise<Response> {
       try {
+         const list: Pets[] = await this.pServ.listPets();
+
+         return res.status(200).json(list);
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {
@@ -35,6 +54,23 @@ export default class PetController {
 
    async updatePet(req: Request, res: Response): Promise<Response> {
       try {
+         const { pet_id, pet_nome, pet_idade, cli_id, esp_id, rac_id } =
+            req.body as IUpdatePetDTO;
+
+         const data: IUpdatePetDTO = {
+            pet_id,
+            pet_nome,
+            pet_idade,
+            cli_id,
+            esp_id,
+            rac_id,
+         };
+
+         const updatedPet: Pets = await this.pServ.updatePets(data);
+
+         return res
+            .status(200)
+            .json({ msg: "Dados do pet atualizados", data: updatedPet });
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {
@@ -47,6 +83,14 @@ export default class PetController {
 
    async deletePet(req: Request, res: Response): Promise<Response> {
       try {
+         const { id } = req.params;
+         const parsedId = parseInt(id);
+
+         const deletedPet: Pets = await this.pServ.findById(parsedId);
+
+         return res
+            .status(200)
+            .json({ msg: "Pet deletado com sucesso", data: deletedPet });
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {
@@ -59,6 +103,12 @@ export default class PetController {
 
    async findById(req: Request, res: Response): Promise<Response> {
       try {
+         const { id } = req.params;
+         const parsedId = parseInt(id);
+
+         const finded: Pets = await this.pServ.findById(parsedId);
+
+         return res.status(200).json(finded);
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {
@@ -71,6 +121,12 @@ export default class PetController {
 
    async findByRaca(req: Request, res: Response): Promise<Response> {
       try {
+         const { id } = req.params;
+         const parsedId = parseInt(id);
+
+         const finded: Pets[] = await this.pServ.findByRaca(parsedId);
+
+         return res.status(200).json(finded);
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {
@@ -83,6 +139,12 @@ export default class PetController {
 
    async findByClient(req: Request, res: Response): Promise<Response> {
       try {
+         const { id } = req.params;
+         const parsedId = parseInt(id);
+
+         const finded: Pets[] = await this.pServ.findByClient(parsedId);
+
+         return res.status(200).json(finded);
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {
@@ -95,6 +157,12 @@ export default class PetController {
 
    async findByEspecie(req: Request, res: Response): Promise<Response> {
       try {
+         const { id } = req.params;
+         const parsedId = parseInt(id);
+
+         const finded: Pets[] = await this.pServ.findByEspecie(parsedId);
+
+         return res.status(200).json(finded);
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {

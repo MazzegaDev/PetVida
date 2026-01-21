@@ -752,6 +752,209 @@
           }
         }
       }
+    },
+    "/pet/cadastrarPet": {
+      "post": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Cadastra um pet",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pet"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pet/listarPets": {
+      "get": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Lista todos os pets",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pet/alterarPet": {
+      "put": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Altera um pet",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/petAlter"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pet/deletarPet/{id}": {
+      "delete": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Deleta um pet",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pet/buscarPorId/{id}": {
+      "get": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Lista um pet por seu id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/pet/buscarPorIdRaca/{id}": {
+      "get": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Lista um pet por seu id de raça",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pet/buscarPorIdEspecie/{id}": {
+      "get": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Lista um pet por seu id de especie",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pet/buscarPorIdCliente/{id}": {
+      "get": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Lista um pet por seu id de cliente",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -932,6 +1135,60 @@
           "prd_quantidade": {
             "type": "number",
             "example": 10
+          }
+        }
+      },
+      "pet": {
+        "type": "object",
+        "properties": {
+          "pet_nome": {
+            "type": "string",
+            "example": "Nome"
+          },
+          "pet_idade": {
+            "type": "number",
+            "example": 1
+          },
+          "cli_id": {
+            "type": "number",
+            "example": 1
+          },
+          "esp_id": {
+            "type": "number",
+            "example": 1
+          },
+          "rac_id": {
+            "type": "number",
+            "example": 1
+          }
+        }
+      },
+      "petAlter": {
+        "type": "object",
+        "properties": {
+          "pet_id": {
+            "type": "number",
+            "example": 1
+          },
+          "pet_nome": {
+            "type": "string",
+            "example": "Nome"
+          },
+          "pet_idade": {
+            "type": "number",
+            "example": 1
+          },
+          "cli_id": {
+            "type": "number",
+            "example": 1
+          },
+          "esp_id": {
+            "type": "number",
+            "example": 1
+          },
+          "rac_id": {
+            "type": "number",
+            "example": 1
           }
         }
       }

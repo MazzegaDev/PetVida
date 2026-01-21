@@ -7,6 +7,7 @@ import racaRouter from "./routes/racaRouter";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swaggerOutput.json";
 import especieRouter from "./routes/especieRouter"
+import petRouter from "./routes/petRouter";
 
 const app = express();
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use("/produto", produtoRouter);
 app.use("/cliente", clienteRouter);
 app.use("/raca", racaRouter);
 app.use("/especie", especieRouter);
+app.use("/pet", petRouter);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;
