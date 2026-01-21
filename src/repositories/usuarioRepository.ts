@@ -19,7 +19,11 @@ export default class UsuarioRepository {
    }
 
    async listUsers(): Promise<Usuario[]> {
-      const list: Usuario[] = await this.prisma.usuario.findMany();
+      const list: Usuario[] = await this.prisma.usuario.findMany({
+         include:{
+            papel: true,
+         }
+      });
 
       return list;
    }
@@ -48,6 +52,9 @@ export default class UsuarioRepository {
    async findById(usu_id: number): Promise<Usuario | null> {
       const findedUser: Usuario | null = await this.prisma.usuario.findUnique({
          where: { usu_id },
+         include: {
+            papel: true
+         }
       });
 
       return findedUser;
@@ -56,6 +63,9 @@ export default class UsuarioRepository {
    async findByEmail(usu_email: string): Promise<Usuario | null> {
       const findedUser: Usuario | null = await this.prisma.usuario.findUnique({
          where: { usu_email },
+         include: {
+            papel: true,
+         },
       });
 
       return findedUser;

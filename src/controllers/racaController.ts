@@ -101,7 +101,7 @@ export default class RacaController {
 
          return res
             .status(200)
-            .json({ msg: "Raça deletada", data: findedRace });
+            .json(findedRace);
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {

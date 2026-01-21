@@ -24,7 +24,13 @@ export default class PetRepository {
    }
 
    async listPets(): Promise<Pets[]> {
-      return this.prisma.pets.findMany();
+      return this.prisma.pets.findMany({
+         include: {
+            cliente: true,
+            raca: true,
+            especie: true,
+         },
+      });
    }
 
    async updatePet(data: IUpdatePetDTO): Promise<Pets> {
@@ -59,18 +65,33 @@ export default class PetRepository {
    async findByRaca(id: number): Promise<Pets[]> {
       return await this.prisma.pets.findMany({
          where: { rac_id: id },
+         include: {
+            cliente: true,
+            raca: true,
+            especie: true,
+         },
       });
    }
 
    async findByEspecie(id: number): Promise<Pets[]> {
       return await this.prisma.pets.findMany({
          where: { esp_id: id },
+         include: {
+            cliente: true,
+            raca: true,
+            especie: true,
+         },
       });
    }
 
    async findByClient(id: number): Promise<Pets[]> {
       return await this.prisma.pets.findMany({
          where: { cli_id: id },
+         include: {
+            cliente: true,
+            raca: true,
+            especie: true,
+         },
       });
    }
 
@@ -78,6 +99,11 @@ export default class PetRepository {
       return await this.prisma.pets.findUnique({
          where: {
             pet_id: id,
+         },
+         include: {
+            cliente: true,
+            raca: true,
+            especie: true,
          },
       });
    }

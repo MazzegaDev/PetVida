@@ -30,6 +30,10 @@
     },
     "/usuario/cadastrarUsuario": {
       "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Cadastra um usuario",
         "description": "",
         "responses": {
           "201": {
@@ -40,24 +44,11 @@
           }
         },
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "usu_nome": {
-                    "example": "any"
-                  },
-                  "usu_email": {
-                    "example": "any"
-                  },
-                  "usu_senha": {
-                    "example": "any"
-                  },
-                  "pap_id": {
-                    "example": "any"
-                  }
-                }
+                "$ref": "#/components/schemas/usuario"
               }
             }
           }
@@ -77,16 +68,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/usuario"
-              }
-            }
           }
         }
       }

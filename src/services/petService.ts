@@ -136,7 +136,7 @@ export default class PetService {
 
    async findByRaca(id: number): Promise<Pets[]> {
       const findedPet: Pets[] | null = await this.pRepo.findByRaca(id);
-      if (!findedPet) {
+      if (findedPet.length === 0) {
          throw new AppError("Nenhum pet pertence a essa raça", 404);
       }
 
@@ -145,7 +145,7 @@ export default class PetService {
 
    async findByClient(id: number): Promise<Pets[]> {
       const findedPet: Pets[] | null = await this.pRepo.findByClient(id);
-      if (!findedPet) {
+      if (findedPet.length === 0) {
          throw new AppError("Nenhum pet pertence a esse cliente", 404);
       }
 
@@ -154,7 +154,7 @@ export default class PetService {
 
    async findByEspecie(id: number): Promise<Pets[]> {
       const findedPet: Pets[] | null = await this.pRepo.findByEspecie(id);
-      if (!findedPet) {
+      if (findedPet.length === 0) {
          throw new AppError("Nenhum pet pertence a essa especie", 404);
       }
 

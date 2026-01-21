@@ -5,13 +5,8 @@ const router = Router();
 const controller = new UsuarioController();
 
 router.post("/cadastrarUsuario", (req, res) => {
-   controller.createUser(req, res);
-})
-
-router.get("/listarUsuarios", (req, res) => {
    // #swagger.tags = ['Usuario']
-   // #swagger.summary = 'Lista todos os usuarios'
-
+   // #swagger.summary = 'Cadastra um usuario'
    /*
         #swagger.requestBody = {
             required: true,
@@ -24,6 +19,14 @@ router.get("/listarUsuarios", (req, res) => {
             }
         }
    */
+   controller.createUser(req, res);
+})
+
+router.get("/listarUsuarios", (req, res) => {
+   // #swagger.tags = ['Usuario']
+   // #swagger.summary = 'Lista todos os usuarios'
+
+
    controller.listUsers(req, res);
 })
 
