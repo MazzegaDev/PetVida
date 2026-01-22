@@ -12,7 +12,6 @@ const doc = {
    ],
    components: {
       schemas: {
-         // 🔥 PLURAL
          cliente: {
             cli_nome: "Nome",
             cli_telefone: "(00) 0000-0000",
@@ -80,6 +79,15 @@ const doc = {
             cli_id: 1,
             esp_id: 1,
             rac_id: 1,
+         },
+         servico: {
+            ser_nome: "Nome",
+            ser_preco: 89.9,
+         },
+         servicoAlter: {
+            ser_id: 1,
+            ser_nome: "Nome",
+            ser_preco: 99.8,
          },
       },
    },

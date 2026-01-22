@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/papeis/funcoes": {
+    "/cargo/funcoes": {
       "get": {
         "tags": [
           "Papel"
@@ -936,6 +936,131 @@
           }
         }
       }
+    },
+    "/servico/cadastrarServico": {
+      "post": {
+        "tags": [
+          "Serviço"
+        ],
+        "summary": "Cadastra um serviço",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/servico"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/servico/listarServicos": {
+      "get": {
+        "tags": [
+          "Serviço"
+        ],
+        "summary": "Lista todos os serviços",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/servico/alterarServico": {
+      "put": {
+        "tags": [
+          "Serviço"
+        ],
+        "summary": "Altera um serviço",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/servicoAlter"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/servico/deletarServico/{id}": {
+      "delete": {
+        "tags": [
+          "Serviço"
+        ],
+        "summary": "Deleta um serviço",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/servico/buscarPorId/{id}": {
+      "get": {
+        "tags": [
+          "Serviço"
+        ],
+        "summary": "Busca um serviço por ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1170,6 +1295,36 @@
           "rac_id": {
             "type": "number",
             "example": 1
+          }
+        }
+      },
+      "servico": {
+        "type": "object",
+        "properties": {
+          "ser_nome": {
+            "type": "string",
+            "example": "Nome"
+          },
+          "ser_preco": {
+            "type": "number",
+            "example": 89.9
+          }
+        }
+      },
+      "servicoAlter": {
+        "type": "object",
+        "properties": {
+          "ser_id": {
+            "type": "number",
+            "example": 1
+          },
+          "ser_nome": {
+            "type": "string",
+            "example": "Nome"
+          },
+          "ser_preco": {
+            "type": "number",
+            "example": 99.8
           }
         }
       }

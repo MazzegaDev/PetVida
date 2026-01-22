@@ -18,9 +18,11 @@ export default class ClienteService {
          throw new AppError("Insira dados validos", 400);
       }
 
-      const existedEmail: Cliente | null = await this.cRepo.findByEmail(data.cli_email);
+      const existedEmail: Cliente | null = await this.cRepo.findByEmail(
+         data.cli_email,
+      );
 
-      if(existedEmail){
+      if (existedEmail) {
          throw new AppError("Já existe um usuario com esse E-Mail", 400);
       }
 
@@ -45,7 +47,7 @@ export default class ClienteService {
 
    async updateClient(data: IUpdateClienteDTO): Promise<Cliente> {
       const findedClient: Cliente | null = await this.cRepo.findById(
-         data.cli_id
+         data.cli_id,
       );
 
       if (!findedClient) {

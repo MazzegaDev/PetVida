@@ -41,7 +41,7 @@ model Atendimento{
   pet_id Int
   pets Pets @relation(fields: [pet_id], references: [pet_id])
 
-  ser_id Int
+  ser_id Int[]
   servico Servico @relation(fields: [ser_id], references: [ser_id])
 }
 
