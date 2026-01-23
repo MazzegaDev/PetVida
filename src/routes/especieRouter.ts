@@ -29,6 +29,12 @@ router.get("/listarRacas", (req, res) => {
    controller.listEspecies(req, res);
 });
 
+router.get("/buscarPorId/:id", (req, res) => {
+   // #swagger.tags = ['Especie']
+   // #swagger.summary = 'Busca uma especie por ID'
+   controller.findById(req, res);
+});
+
 router.put("/alterarRaca", (req, res) => {
    // #swagger.tags = ['Especie']
    // #swagger.summary = 'Altera uma especie'
@@ -52,12 +58,6 @@ router.delete("/deletarRaca/:id", (req, res) => {
    // #swagger.tags = ['Especie']
    // #swagger.summary = 'Deleta uma especie'
    controller.deleteEspecie(req, res);
-});
-
-router.get("/buscarPorId/:id", (req, res) => {
-   // #swagger.tags = ['Especie']
-   // #swagger.summary = 'Busca uma especie por ID'
-   controller.findById(req, res);
 });
 
 export default router;

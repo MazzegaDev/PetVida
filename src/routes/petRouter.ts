@@ -29,33 +29,6 @@ router.get("/listarPets", (req, res) => {
 
    controller.listPets(req, res);
 });
-
-router.put("/alterarPet", (req, res) => {
-   // #swagger.tags = ['Pet']
-   // #swagger.summary = 'Altera um pet'
-
-   /*
-        #swagger.requestBody = {
-            required: true,
-            content: {
-                "application/json": {
-                    schema: {
-                        $ref: '#/components/schemas/petAlter'
-                    }
-                }
-            }
-        }
-   */
-
-   controller.updatePet(req, res);
-});
-
-router.delete("/deletarPet/:id", (req, res) => {
-   // #swagger.tags = ['Pet']
-   // #swagger.summary = 'Deleta um pet'
-   controller.deletePet(req, res);
-});
-
 router.get("/buscarPorId/:id", (req, res) => {
    // #swagger.tags = ['Pet']
    // #swagger.summary = 'Lista um pet por seu id'
@@ -82,6 +55,32 @@ router.get("/buscarPorIdCliente/:id", (req, res) => {
    // #swagger.summary = 'Lista um pet por seu id de cliente'
 
    controller.findByClient(req, res);
+});
+
+router.put("/alterarPet", (req, res) => {
+   // #swagger.tags = ['Pet']
+   // #swagger.summary = 'Altera um pet'
+
+   /*
+        #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: '#/components/schemas/petAlter'
+                    }
+                }
+            }
+        }
+   */
+
+   controller.updatePet(req, res);
+});
+
+router.delete("/deletarPet/:id", (req, res) => {
+   // #swagger.tags = ['Pet']
+   // #swagger.summary = 'Deleta um pet'
+   controller.deletePet(req, res);
 });
 
 export default router;

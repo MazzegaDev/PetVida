@@ -31,6 +31,13 @@ router.get("/listarServicos", (req, res) => {
    controller.listServico(req, res);
 });
 
+router.get("/buscarPorId/:id", (req, res) => {
+   // #swagger.tags = ['Serviço']
+   // #swagger.summary = 'Busca um serviço por ID'
+
+   controller.findById(req, res);
+});
+
 router.put("/alterarServico", (req, res) => {
    // #swagger.tags = ['Serviço']
    // #swagger.summary = 'Altera um serviço'
@@ -57,11 +64,6 @@ router.delete("/deletarServico/:id", (req, res) => {
    controller.deleteServico(req, res);
 });
 
-router.get("/buscarPorId/:id", (req, res) =>{
-   // #swagger.tags = ['Serviço']
-   // #swagger.summary = 'Busca um serviço por ID'
 
-   controller.findById(req, res);
-})
 
 export default router;

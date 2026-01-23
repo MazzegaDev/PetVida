@@ -72,60 +72,6 @@
         }
       }
     },
-    "/usuario/alterarUsuario": {
-      "put": {
-        "tags": [
-          "Usuario"
-        ],
-        "summary": "Altera um usuario",
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/usuarioAlter"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/usuario/deletarUsuario/{id}": {
-      "delete": {
-        "tags": [
-          "Usuario"
-        ],
-        "summary": "Deleta um usuario",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/usuario/buscarPorId/{id}": {
       "get": {
         "tags": [
@@ -163,6 +109,60 @@
         "parameters": [
           {
             "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/usuario/alterarUsuario": {
+      "put": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Altera um usuario",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarioAlter"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuario/deletarUsuario/{id}": {
+      "delete": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Deleta um usuario",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -224,6 +224,33 @@
         }
       }
     },
+    "/produto/buscarPorId/{id}": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Busca um produto pelo ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/produto/alterarProduto": {
       "put": {
         "tags": [
@@ -245,6 +272,33 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/produtoAlter"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produto/baixaNoEstoque": {
+      "patch": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Baixa o estoque de um produto",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/baixaEstoque"
               }
             }
           }
@@ -274,60 +328,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/produto/buscarPorId/{id}": {
-      "get": {
-        "tags": [
-          "Produto"
-        ],
-        "summary": "Busca um produto pelo ID",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/produto/baixaNoEstoque": {
-      "patch": {
-        "tags": [
-          "Produto"
-        ],
-        "summary": "Baixa o estoque de um produto",
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/baixaEstoque"
-              }
-            }
           }
         }
       }
@@ -366,60 +366,6 @@
         ],
         "summary": "Lista todos os clientes",
         "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/cliente/alterarCliente": {
-      "put": {
-        "tags": [
-          "Cliente"
-        ],
-        "summary": "Altera um cliente",
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/clienteAlter"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/cliente/deletarCliente/{id}": {
-      "delete": {
-        "tags": [
-          "Cliente"
-        ],
-        "summary": "Deleta um cliente",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -484,6 +430,60 @@
         }
       }
     },
+    "/cliente/alterarCliente": {
+      "put": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Altera um cliente",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/clienteAlter"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cliente/deletarCliente/{id}": {
+      "delete": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Deleta um cliente",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/raca/cadastrarRaca": {
       "post": {
         "tags": [
@@ -528,6 +528,33 @@
         }
       }
     },
+    "/raca/buscarPorId/{id}": {
+      "get": {
+        "tags": [
+          "Raça"
+        ],
+        "summary": "Busca uma raça por ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/raca/alterarRaca": {
       "put": {
         "tags": [
@@ -561,33 +588,6 @@
           "Raça"
         ],
         "summary": "Deleta uma raça",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/raca/buscarPorId/{id}": {
-      "get": {
-        "tags": [
-          "Raça"
-        ],
-        "summary": "Busca uma raça por ID",
         "description": "",
         "parameters": [
           {
@@ -653,6 +653,33 @@
         }
       }
     },
+    "/especie/buscarPorId/{id}": {
+      "get": {
+        "tags": [
+          "Especie"
+        ],
+        "summary": "Busca uma especie por ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/especie/alterarRaca": {
       "put": {
         "tags": [
@@ -686,33 +713,6 @@
           "Especie"
         ],
         "summary": "Deleta uma especie",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/especie/buscarPorId/{id}": {
-      "get": {
-        "tags": [
-          "Especie"
-        ],
-        "summary": "Busca uma especie por ID",
         "description": "",
         "parameters": [
           {
@@ -768,60 +768,6 @@
         ],
         "summary": "Lista todos os pets",
         "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/pet/alterarPet": {
-      "put": {
-        "tags": [
-          "Pet"
-        ],
-        "summary": "Altera um pet",
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/petAlter"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/pet/deletarPet/{id}": {
-      "delete": {
-        "tags": [
-          "Pet"
-        ],
-        "summary": "Deleta um pet",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -937,6 +883,60 @@
         }
       }
     },
+    "/pet/alterarPet": {
+      "put": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Altera um pet",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/petAlter"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pet/deletarPet/{id}": {
+      "delete": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Deleta um pet",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/servico/cadastrarServico": {
       "post": {
         "tags": [
@@ -974,6 +974,33 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/servico/buscarPorId/{id}": {
+      "get": {
+        "tags": [
+          "Serviço"
+        ],
+        "summary": "Busca um serviço por ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1035,12 +1062,56 @@
         }
       }
     },
-    "/servico/buscarPorId/{id}": {
+    "/atendimento/iniciarAtendimento": {
+      "post": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Inicia um atendimento",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/atendimento"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/atendimento/listarAtendimentos": {
       "get": {
         "tags": [
-          "Serviço"
+          "Atendimento"
         ],
-        "summary": "Busca um serviço por ID",
+        "summary": "Lista todos os atendimentos",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/atendimento/buscarPorId/{id}": {
+      "get": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Busca um atendimento por ID",
         "description": "",
         "parameters": [
           {
@@ -1053,11 +1124,38 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/atendimento/alterarStatus": {
+      "patch": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Altera o status de um atendimento um atendimento",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/alterarStatus"
+              }
+            }
           }
         }
       }
@@ -1325,6 +1423,39 @@
           "ser_preco": {
             "type": "number",
             "example": 99.8
+          }
+        }
+      },
+      "atendimento": {
+        "type": "object",
+        "properties": {
+          "pet_id": {
+            "type": "number",
+            "example": 1
+          },
+          "ser_id": {
+            "type": "array",
+            "example": [
+              1,
+              2,
+              3
+            ],
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "alterarStatus": {
+        "type": "object",
+        "properties": {
+          "ate_id": {
+            "type": "number",
+            "example": 1
+          },
+          "ate_status": {
+            "type": "string",
+            "example": "Concluido | Pendente | Negado"
           }
         }
       }

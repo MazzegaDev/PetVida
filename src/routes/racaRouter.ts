@@ -29,6 +29,12 @@ router.get("/listarRacas", (req, res) => {
    controller.listRacas(req, res);
 });
 
+router.get("/buscarPorId/:id", (req, res) => {
+   // #swagger.tags = ['Raça']
+   // #swagger.summary = 'Busca uma raça por ID'
+   controller.findById(req, res);
+});
+
 router.put("/alterarRaca", (req, res) => {
    // #swagger.tags = ['Raça']
    // #swagger.summary = 'Altera uma raça'
@@ -54,10 +60,6 @@ router.delete("/deletarRaca/:id", (req, res) => {
    controller.deleteRaca(req, res);
 });
 
-router.get("/buscarPorId/:id", (req, res) => {
-   // #swagger.tags = ['Raça']
-   // #swagger.summary = 'Busca uma raça por ID'
-   controller.findById(req, res);
-});
+
 
 export default router;

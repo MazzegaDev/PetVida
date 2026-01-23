@@ -29,6 +29,12 @@ router.get("/listarProdutos", (req, res) => {
    controller.listProducts(req, res);
 });
 
+router.get("/buscarPorId/:id", (req, res) => {
+   // #swagger.tags = ['Produto']
+   // #swagger.summary = 'Busca um produto pelo ID'
+   controller.findById(req, res);
+});
+
 router.put("/alterarProduto", (req, res) => {
    // #swagger.tags = ['Produto']
    // #swagger.summary = 'Altera um produto'
@@ -46,18 +52,6 @@ router.put("/alterarProduto", (req, res) => {
         }
    */
    controller.updateProduct(req, res);
-});
-
-router.delete("/deletarProduto/:id", (req, res) => {
-   // #swagger.tags = ['Produto']
-   // #swagger.summary = 'Deleta um produto'
-   controller.deleteProduct(req, res);
-});
-
-router.get("/buscarPorId/:id", (req, res) => {
-   // #swagger.tags = ['Produto']
-   // #swagger.summary = 'Busca um produto pelo ID'
-   controller.findById(req, res);
 });
 
 router.patch("/baixaNoEstoque", (req, res) => {
@@ -78,5 +72,14 @@ router.patch("/baixaNoEstoque", (req, res) => {
    */
    controller.updateStock(req, res);
 });
+
+router.delete("/deletarProduto/:id", (req, res) => {
+   // #swagger.tags = ['Produto']
+   // #swagger.summary = 'Deleta um produto'
+   controller.deleteProduct(req, res);
+});
+
+
+
 
 export default router;

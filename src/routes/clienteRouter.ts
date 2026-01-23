@@ -31,6 +31,20 @@ router.get("/listarClientes", (req, res) => {
    controller.listClients(req, res);
 });
 
+router.get("/buscarPorId/:id", (req, res) => {
+   // #swagger.tags = ['Cliente']
+   // #swagger.summary = 'Busca um cliente por seu ID'
+
+   controller.findById(req, res);
+});
+
+router.get("/buscarPorEmail/:email", (req, res) => {
+   // #swagger.tags = ['Cliente']
+   // #swagger.summary = 'Busca um cliente por seu E-mail'
+
+   controller.findByEmail(req, res);
+});
+
 router.put("/alterarCliente", (req, res) => {
    // #swagger.tags = ['Cliente']
    // #swagger.summary = 'Altera um cliente'
@@ -57,18 +71,5 @@ router.delete("/deletarCliente/:id", (req, res) => {
    controller.deleteClient(req, res);
 });
 
-router.get("/buscarPorId/:id", (req, res) => {
-   // #swagger.tags = ['Cliente']
-   // #swagger.summary = 'Busca um cliente por seu ID'
-
-   controller.findById(req, res);
-});
-
-router.get("/buscarPorEmail/:email", (req, res) => {
-   // #swagger.tags = ['Cliente']
-   // #swagger.summary = 'Busca um cliente por seu E-mail'
-
-   controller.findByEmail(req, res);
-});
 
 export default router;
