@@ -36,6 +36,7 @@ model Produto{
 model Atendimento{
   ate_id Int @id @default(autoincrement())
   ate_data DateTime
+  ate_status String
   ate_valortotal Float
 
   pet_id Int

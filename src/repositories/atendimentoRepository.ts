@@ -1,4 +1,4 @@
-import { ICreateAtendimentoDTO } from "../interfaces/atendimentoDTO";
+import { ICreateAtendimentoDTO, IUpdateStatusDTO } from "../interfaces/atendimentoDTO";
 import { Prisma } from "../database/database";
 import { Atendimento } from "../generated/prisma/client";
 
@@ -10,6 +10,7 @@ export default class AtendimentoRepository {
          data: {
             ate_data: data.ate_data,
             ate_valortotal: data.ate_valortotal,
+            ate_status: data.ate_status,
             ser_id: data.ser_id,
             pet_id: data.pet_id,
          },
@@ -35,5 +36,14 @@ export default class AtendimentoRepository {
             servico: true,
          },
       });
+   }
+
+   async changeStatus(data: IUpdateStatusDTO): Promise<Atendimento>{
+      return await this.prisma.atendimento.update({
+         where: {ate_id: data.ate_id},
+         data:{
+            ate_status: data.ate_status
+         }
+      })
    }
 }

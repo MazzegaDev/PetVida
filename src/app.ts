@@ -9,7 +9,7 @@ import swaggerDocument from "./swaggerOutput.json";
 import especieRouter from "./routes/especieRouter"
 import petRouter from "./routes/petRouter";
 import servicoRouter from "./routes/servicoRouter";
-
+import atendimentoRouter from "./routes/atendimentoRouter";
 
 const app = express();
 app.use(express.json());
@@ -21,6 +21,7 @@ app.use("/raca", racaRouter);
 app.use("/especie", especieRouter);
 app.use("/pet", petRouter);
 app.use("/servico", servicoRouter);
+app.use("/atendimento", atendimentoRouter);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;

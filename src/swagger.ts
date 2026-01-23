@@ -89,6 +89,14 @@ const doc = {
             ser_nome: "Nome",
             ser_preco: 99.8,
          },
+         atendimento: {
+            pet_id: 1,
+            ser_id: [1, 2, 3],
+         },
+         alterarStatus: {
+            ate_id: 1,
+            ate_status: "Concluido | Pendente | Negado"
+         }
       },
    },
 };
