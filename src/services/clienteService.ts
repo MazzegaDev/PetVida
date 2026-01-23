@@ -64,6 +64,10 @@ export default class ClienteService {
 
       const updatedClient: Cliente = await this.cRepo.updateClient(data);
 
+      if (!updatedClient) {
+         throw new AppError("Não foi possivel alterar dados do cliente", 500);
+      }
+
       return updatedClient;
    }
 
@@ -76,6 +80,10 @@ export default class ClienteService {
 
       const deletedClient: Cliente = await this.cRepo.deleteClient(id);
 
+      if (!deletedClient) {
+         throw new AppError("Não foi possivel deletar o cliente", 500);
+      }
+      
       return deletedClient;
    }
 

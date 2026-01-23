@@ -56,6 +56,13 @@ export default class UsuarioService {
 
       const updatedUser: Usuario = await this.uRepo.updateUser(data);
 
+      if (!updatedUser) {
+         throw new AppError(
+            "Não foi possivel alterar os dados do usuario",
+            500,
+         );
+      }
+
       return updatedUser;
    }
 
@@ -67,6 +74,10 @@ export default class UsuarioService {
       }
 
       const deletedUser: Usuario = await this.uRepo.deleteUser(id);
+
+      if (!deletedUser) {
+         throw new AppError("Não foi possivel deletar o usuario", 500);
+      }
 
       return deletedUser;
    }

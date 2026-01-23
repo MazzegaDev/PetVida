@@ -44,6 +44,13 @@ export default class ServicoService {
 
       const updated: Servico = await this.sRepo.updateServico(data);
 
+      if (!updated) {
+         throw new AppError(
+            "Não foi possivel alterar os dados do serviço",
+            500,
+         );
+      }
+
       return updated;
    }
 
@@ -56,6 +63,10 @@ export default class ServicoService {
 
       const deleted: Servico = await this.sRepo.deleteServico(id);
 
+      if (!deleted) {
+         throw new AppError("Não foi possivel deletar o serviço", 500);
+      }
+      
       return deleted;
    }
 
