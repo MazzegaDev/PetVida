@@ -34,7 +34,12 @@ export default class AtendimentoRepository {
    async listAtendimento(): Promise<Atendimento[]> {
       return await this.prisma.atendimento.findMany({
          include: {
-            pets: true,
+            pets: {
+               include: {
+                  especie: true,
+                  raca: true,
+               }
+            },
             servico: true,
          },
       });

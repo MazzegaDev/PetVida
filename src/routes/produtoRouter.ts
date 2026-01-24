@@ -1,13 +1,17 @@
 import { Router } from "express";
 import ProdutoController from "../controllers/produtoController";
+import { validateAuth, validateAuthAdm } from "../middleware/authMiddleware";
 
 const router = Router();
 const controller = new ProdutoController();
 
-router.post("/cadastrarProduto", (req, res) => {
+router.post("/cadastrarProduto", validateAuthAdm,(req, res) => {
    // #swagger.tags = ['Produto']
    // #swagger.summary = 'Cadastra um produto'
-
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
    /*
         #swagger.requestBody = {
             required: true,
@@ -23,22 +27,33 @@ router.post("/cadastrarProduto", (req, res) => {
    controller.newProduct(req, res);
 });
 
-router.get("/listarProdutos", (req, res) => {
+router.get("/listarProdutos", validateAuth, (req, res) => {
    // #swagger.tags = ['Produto']
    // #swagger.summary = 'Lista todos os produtos'
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
    controller.listProducts(req, res);
 });
 
-router.get("/buscarPorId/:id", (req, res) => {
+router.get("/buscarPorId/:id", validateAuthAdm, (req, res) => {
    // #swagger.tags = ['Produto']
    // #swagger.summary = 'Busca um produto pelo ID'
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
    controller.findById(req, res);
 });
 
-router.put("/alterarProduto", (req, res) => {
+router.put("/alterarProduto", validateAuthAdm, (req, res) => {
    // #swagger.tags = ['Produto']
    // #swagger.summary = 'Altera um produto'
-
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
    /*
         #swagger.requestBody = {
             required: true,
@@ -54,10 +69,13 @@ router.put("/alterarProduto", (req, res) => {
    controller.updateProduct(req, res);
 });
 
-router.patch("/baixaNoEstoque", (req, res) => {
+router.patch("/baixaNoEstoque", validateAuthAdm, (req, res) => {
    // #swagger.tags = ['Produto']
    // #swagger.summary = 'Baixa o estoque de um produto'
-
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
    /*
         #swagger.requestBody = {
             required: true,
@@ -73,9 +91,13 @@ router.patch("/baixaNoEstoque", (req, res) => {
    controller.updateStock(req, res);
 });
 
-router.delete("/deletarProduto/:id", (req, res) => {
+router.delete("/deletarProduto/:id", validateAuthAdm, (req, res) => {
    // #swagger.tags = ['Produto']
    // #swagger.summary = 'Deleta um produto'
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
    controller.deleteProduct(req, res);
 });
 

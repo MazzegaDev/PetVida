@@ -1073,10 +1073,18 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1156,6 +1164,43 @@
                 "$ref": "#/components/schemas/alterarStatus"
               }
             }
+          }
+        }
+      }
+    },
+    "/login/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "Se autentifica no sistema",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/login"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login/logout": {
+      "post": {
+        "description": "",
+        "responses": {
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -1458,6 +1503,25 @@
             "example": "Concluido | Pendente | Negado"
           }
         }
+      },
+      "login": {
+        "type": "object",
+        "properties": {
+          "usu_email": {
+            "type": "string",
+            "example": "nome@email.com"
+          },
+          "usu_senha": {
+            "type": "string",
+            "example": "senha123"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   }

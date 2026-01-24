@@ -10,9 +10,14 @@ import especieRouter from "./routes/especieRouter"
 import petRouter from "./routes/petRouter";
 import servicoRouter from "./routes/servicoRouter";
 import atendimentoRouter from "./routes/atendimentoRouter";
+import loginRouter from "./routes/loginRouter";
+
+import cookieParser from "cookie-parser";
 
 const app = express();
+app.use(cookieParser());
 app.use(express.json());
+
 app.use("/cargo", papelRouter);
 app.use("/usuario", usuarioRouter);
 app.use("/produto", produtoRouter);
@@ -22,6 +27,7 @@ app.use("/especie", especieRouter);
 app.use("/pet", petRouter);
 app.use("/servico", servicoRouter);
 app.use("/atendimento", atendimentoRouter);
+app.use("/login", loginRouter);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;

@@ -95,8 +95,18 @@ const doc = {
          },
          alterarStatus: {
             ate_id: 1,
-            ate_status: "Concluido | Pendente | Negado"
-         }
+            ate_status: "Concluido | Pendente | Negado",
+         },
+         login: {
+            usu_email: "nome@email.com",
+            usu_senha: "senha123",
+         },
+      },
+      securitySchemes: {
+         bearerAuth: {
+            type: "http",
+            scheme: "bearer",
+         },
       },
    },
 };
