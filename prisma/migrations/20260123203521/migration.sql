@@ -22,6 +22,7 @@ CREATE TABLE "Produto" (
     "prd_id" SERIAL NOT NULL,
     "prd_nome" TEXT NOT NULL,
     "prd_quantidade" INTEGER NOT NULL,
+    "prd_preco" DOUBLE PRECISION NOT NULL,
 
     CONSTRAINT "Produto_pkey" PRIMARY KEY ("prd_id")
 );
@@ -30,11 +31,19 @@ CREATE TABLE "Produto" (
 CREATE TABLE "Atendimento" (
     "ate_id" SERIAL NOT NULL,
     "ate_data" TIMESTAMP(3) NOT NULL,
+    "ate_status" TEXT NOT NULL,
     "ate_valortotal" DOUBLE PRECISION NOT NULL,
     "pet_id" INTEGER NOT NULL,
-    "ser_id" INTEGER NOT NULL,
 
     CONSTRAINT "Atendimento_pkey" PRIMARY KEY ("ate_id")
+);
+
+-- CreateTable
+CREATE TABLE "AtendimentoServico" (
+    "ate_id" INTEGER NOT NULL,
+    "ser_id" INTEGER NOT NULL,
+
+    CONSTRAINT "AtendimentoServico_pkey" PRIMARY KEY ("ate_id","ser_id")
 );
 
 -- CreateTable
@@ -85,6 +94,9 @@ CREATE TABLE "Cliente" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Usuario_usu_email_key" ON "Usuario"("usu_email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Especie_esp_nome_key" ON "Especie"("esp_nome");
 
 -- CreateIndex
@@ -100,7 +112,10 @@ ALTER TABLE "Usuario" ADD CONSTRAINT "Usuario_pap_id_fkey" FOREIGN KEY ("pap_id"
 ALTER TABLE "Atendimento" ADD CONSTRAINT "Atendimento_pet_id_fkey" FOREIGN KEY ("pet_id") REFERENCES "Pets"("pet_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Atendimento" ADD CONSTRAINT "Atendimento_ser_id_fkey" FOREIGN KEY ("ser_id") REFERENCES "Servico"("ser_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "AtendimentoServico" ADD CONSTRAINT "AtendimentoServico_ate_id_fkey" FOREIGN KEY ("ate_id") REFERENCES "Atendimento"("ate_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "AtendimentoServico" ADD CONSTRAINT "AtendimentoServico_ser_id_fkey" FOREIGN KEY ("ser_id") REFERENCES "Servico"("ser_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Pets" ADD CONSTRAINT "Pets_cli_id_fkey" FOREIGN KEY ("cli_id") REFERENCES "Cliente"("cli_id") ON DELETE RESTRICT ON UPDATE CASCADE;

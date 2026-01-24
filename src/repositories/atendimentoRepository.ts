@@ -1,18 +1,32 @@
-import { ICreateAtendimentoDTO, IUpdateStatusDTO } from "../interfaces/atendimentoDTO";
+import {
+   ICreateAtendimentoDTO,
+   IUpdateStatusDTO,
+} from "../interfaces/atendimentoDTO";
 import { Prisma } from "../database/database";
 import { Atendimento } from "../generated/prisma/client";
 
 export default class AtendimentoRepository {
    readonly prisma = Prisma;
 
-   async createAtendimento(data: ICreateAtendimentoDTO): Promise<Atendimento> {
+   async createAtendimento(data: ICreateAtendimentoDTO) {
       return await this.prisma.atendimento.create({
          data: {
             ate_data: data.ate_data,
             ate_valortotal: data.ate_valortotal,
             ate_status: data.ate_status,
-            ser_id: data.ser_id,
             pet_id: data.pet_id,
+            servico: {
+               create: data.ser_id.map((id) => ({
+                  ser_id: id,
+               })),
+            },
+         },
+         include: {
+            servico: {
+               include: {
+                  servico: true,
+               },
+            },
          },
       });
    }
@@ -38,12 +52,12 @@ export default class AtendimentoRepository {
       });
    }
 
-   async changeStatus(data: IUpdateStatusDTO): Promise<Atendimento>{
+   async changeStatus(data: IUpdateStatusDTO): Promise<Atendimento> {
       return await this.prisma.atendimento.update({
-         where: {ate_id: data.ate_id},
-         data:{
-            ate_status: data.ate_status
-         }
-      })
+         where: { ate_id: data.ate_id },
+         data: {
+            ate_status: data.ate_status,
+         },
+      });
    }
 }

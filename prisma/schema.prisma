@@ -42,17 +42,27 @@ model Atendimento{
   pet_id Int
   pets Pets @relation(fields: [pet_id], references: [pet_id])
 
-  ser_id Int[]
-  servico Servico @relation(fields: [ser_id], references: [ser_id])
+  servico AtendimentoServico[]
 }
-
 model Servico{
   ser_id Int @id @default(autoincrement())
   ser_nome String
   ser_preco Float
 
-  atendimento Atendimento[]
+  atendimento AtendimentoServico[]
 }
+
+model AtendimentoServico {
+  ate_id Int
+  ser_id Int
+
+  atendimento Atendimento @relation(fields: [ate_id], references: [ate_id])
+  servico Servico @relation(fields: [ser_id], references: [ser_id])
+
+  @@id([ate_id, ser_id])
+}
+
+
 
 model Pets{
   pet_id Int @id @default(autoincrement())
