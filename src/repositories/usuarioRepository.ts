@@ -77,6 +77,9 @@ export default class UsuarioRepository {
    ): Promise<Usuario | null> {
       const user: Usuario | null = await this.prisma.usuario.findUnique({
          where: { usu_email },
+         include: {
+            papel: true,
+         }
       });
 
       if (!user) {
