@@ -39,7 +39,7 @@ export default class ProdutoService {
 
    async updateProduct(data: IUpdateProductDTO): Promise<Produto> {
       const findedProduct: Produto | null = await this.pRepo.findById(
-         data.prd_id
+         data.prd_id,
       );
 
       if (!findedProduct) {
@@ -92,7 +92,7 @@ export default class ProdutoService {
       if (!findedProduct) {
          throw new AppError(
             "Produto não encontrado para atualizar o estoque",
-            404
+            404,
          );
       }
 
@@ -113,5 +113,44 @@ export default class ProdutoService {
       }
 
       return updatedStock;
+   }
+
+   async updateStock2(data: IUpdateStock): Promise<Produto> {
+      const id: number = data.prd_id;
+      const quantity: number = data.prd_quantidade;
+
+      const findedProduct: Produto | null = await this.pRepo.findById(id);
+
+      if (!findedProduct) {
+         throw new AppError(
+            "Produto não encontrado para atualizar o estoque",
+            404,
+         );
+      }
+
+      if (quantity <= 0) {
+         throw new AppError("Informe a quantidade", 404);
+      }
+
+
+      const newStock: number = findedProduct.prd_quantidade + quantity;
+
+      const updatedStock: Produto = await this.pRepo.updateStock(id, newStock);
+
+      if (!updatedStock) {
+         throw new AppError("Erro ao atualizar estoque do produto", 500);
+      }
+
+      return updatedStock;
+   }
+
+   async findLowStock(): Promise<Produto[]> {
+      const list: Produto[] = await this.pRepo.findLowStock();
+
+      if (list.length === 0) {
+         throw new AppError("Nenhum produto com estoque critico", 404);
+      }
+
+      return list;
    }
 }

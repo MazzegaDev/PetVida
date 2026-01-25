@@ -142,4 +142,43 @@ export default class ProdutoController {
          return res.status(500).json({ msg: "Erro interno" });
       }
    }
+
+   async updateStock2(req: Request, res: Response): Promise<Response> {
+      try {
+         const { prd_id, prd_quantidade } = req.body as IUpdateStock;
+
+         const data: IUpdateStock = {
+            prd_id,
+            prd_quantidade,
+         };
+
+         const newStock: Produto = await this.pServ.updateStock2(data);
+
+         return res
+            .status(200)
+            .json({ msg: "Estoque alterado nova quantidade", data: newStock });
+      } catch (error: any) {
+         console.log(error);
+         if (error.statusCode) {
+            return res.status(error.statusCode).json(error.message);
+         }
+
+         return res.status(500).json({ msg: "Erro interno" });
+      }
+   }
+
+   async findLowStock(req: Request, res: Response): Promise<Response> {
+      try {
+         const list: Produto[] = await this.pServ.findLowStock();
+
+         return res.status(200).json(list);
+      } catch (error: any) {
+         console.log(error);
+         if (error.statusCode) {
+            return res.status(error.statusCode).json(error.message);
+         }
+
+         return res.status(500).json({ msg: "Erro interno" });
+      }
+   }
 }

@@ -47,18 +47,10 @@
           "201": {
             "description": "Created"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "500": {
             "description": "Internal Server Error"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -296,6 +288,31 @@
         ]
       }
     },
+    "/produto/listarEstoqueCritico": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Lista todos os produtos com estoque critico (Menor que 5)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/produto/buscarPorId/{id}": {
       "get": {
         "tags": [
@@ -372,6 +389,41 @@
           "Produto"
         ],
         "summary": "Baixa o estoque de um produto",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/baixaEstoque"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produto/adicionarNoEstoque": {
+      "patch": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Adiciona uma certa quantidade ao estoque de um produto",
         "description": "",
         "responses": {
           "200": {
@@ -523,7 +575,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/cliente/buscarPorEmail/{email}": {
@@ -576,6 +633,11 @@
             "description": "Internal Server Error"
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {

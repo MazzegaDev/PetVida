@@ -41,7 +41,10 @@ router.get("/listarClientes", validateAuthAdm, (req, res) => {
 router.get("/buscarPorId/:id", validateAuthAdm,(req, res) => {
    // #swagger.tags = ['Cliente']
    // #swagger.summary = 'Busca um cliente por seu ID'
-
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
    controller.findById(req, res);
 });
 
@@ -58,7 +61,10 @@ router.get("/buscarPorEmail/:email", (req, res) => {
 router.put("/alterarCliente", validateAuthAdm,(req, res) => {
    // #swagger.tags = ['Cliente']
    // #swagger.summary = 'Altera um cliente'
-
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
    /*
         #swagger.requestBody = {
             required: true,

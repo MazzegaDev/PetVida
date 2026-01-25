@@ -5,7 +5,7 @@ import { validateAuth, validateAuthAdm } from "../middleware/authMiddleware";
 const router = Router();
 const controller = new ProdutoController();
 
-router.post("/cadastrarProduto", validateAuthAdm,(req, res) => {
+router.post("/cadastrarProduto", validateAuthAdm, (req, res) => {
    // #swagger.tags = ['Produto']
    // #swagger.summary = 'Cadastra um produto'
    /* #swagger.security = [{
@@ -35,6 +35,16 @@ router.get("/listarProdutos", validateAuth, (req, res) => {
     }]
     */
    controller.listProducts(req, res);
+});
+
+router.get("/listarEstoqueCritico", validateAuth, (req, res) => {
+   // #swagger.tags = ['Produto']
+   // #swagger.summary = 'Lista todos os produtos com estoque critico (Menor que 5)'
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
+   controller.findLowStock(req, res);
 });
 
 router.get("/buscarPorId/:id", validateAuthAdm, (req, res) => {
@@ -91,6 +101,29 @@ router.patch("/baixaNoEstoque", validateAuthAdm, (req, res) => {
    controller.updateStock(req, res);
 });
 
+
+router.patch("/adicionarNoEstoque", validateAuthAdm, (req, res) => {
+   // #swagger.tags = ['Produto']
+   // #swagger.summary = 'Adiciona uma certa quantidade ao estoque de um produto'
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
+   /*
+        #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: '#/components/schemas/baixaEstoque'
+                    }
+                }
+            }
+        }
+   */
+   controller.updateStock2(req, res);
+});
+
 router.delete("/deletarProduto/:id", validateAuthAdm, (req, res) => {
    // #swagger.tags = ['Produto']
    // #swagger.summary = 'Deleta um produto'
@@ -100,8 +133,5 @@ router.delete("/deletarProduto/:id", validateAuthAdm, (req, res) => {
     */
    controller.deleteProduct(req, res);
 });
-
-
-
 
 export default router;
