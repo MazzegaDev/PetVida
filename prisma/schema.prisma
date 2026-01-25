@@ -15,6 +15,8 @@ model Usuario{
   usu_email String @unique
   usu_senha String
 
+  cliente Cliente?
+
   pap_id Int
   papel Papel @relation(fields: [pap_id], references: [pap_id])
 }
@@ -103,5 +105,7 @@ model Cliente{
   cli_email String @unique
 
   pet Pets[]
+  usu_id Int @unique
+  usuario Usuario @relation(fields: [usu_id], references: [usu_id])
 }
 

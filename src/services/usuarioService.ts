@@ -15,6 +15,7 @@ export default class UsuarioService {
          !data.usu_nome.trim() ||
          !data.usu_email.trim() ||
          !data.usu_senha.trim() ||
+         !data.usu_tell.trim() ||
          !data.pap_id
       ) {
          throw new AppError("Insira dados validos", 400);
@@ -43,6 +44,7 @@ export default class UsuarioService {
       if (
          data.usu_nome?.trim() == "" ||
          data.usu_email?.trim() == "" ||
+         data.usu_tell?.trim() == "" ||
          data.usu_senha?.trim() == ""
       ) {
          throw new AppError("Insira dados validos", 400);

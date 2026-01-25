@@ -5,13 +5,10 @@ import { validateAuth, validateAuthAdm } from "../middleware/authMiddleware";
 const router = Router();
 const controller = new UsuarioController();
 
-router.post("/cadastrarUsuario", validateAuthAdm, (req, res) => {
+router.post("/cadastrarUsuario", (req, res) => {
    // #swagger.tags = ['Usuario']
    // #swagger.summary = 'Cadastra um usuario'
-   /* #swagger.security = [{
-        "bearerAuth": []
-    }]
-    */
+
    /*
         #swagger.requestBody = {
             required: true,

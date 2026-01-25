@@ -11,12 +11,13 @@ export default class UsuarioController {
 
    async createUser(req: Request, res: Response): Promise<Response> {
       try {
-         const { usu_nome, usu_email, usu_senha, pap_id } =
+         const { usu_nome, usu_email, usu_senha, usu_tell,pap_id } =
             req.body as ICreateUsuarioDTO;
          const newUser: ICreateUsuarioDTO = {
             usu_nome,
             usu_email,
             usu_senha,
+            usu_tell,
             pap_id,
          };
 
@@ -52,13 +53,14 @@ export default class UsuarioController {
 
    async updateUser(req: Request, res: Response): Promise<Response> {
       try {
-         const { usu_id, usu_nome, usu_email, usu_senha, pap_id } =
+         const { usu_id, usu_nome, usu_email, usu_senha, usu_tell,pap_id } =
             req.body as IUpdateUsuarioDTO;
          const updatedUser: IUpdateUsuarioDTO = {
             usu_id,
             usu_nome,
             usu_email,
             usu_senha,
+            usu_tell,
             pap_id,
          };
 

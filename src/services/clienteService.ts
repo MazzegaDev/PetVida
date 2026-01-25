@@ -13,7 +13,8 @@ export default class ClienteService {
       if (
          !data.cli_nome.trim() ||
          !data.cli_email.trim() ||
-         !data.cli_telefone.trim()
+         !data.cli_telefone.trim() ||
+         !data.usu_id
       ) {
          throw new AppError("Insira dados validos", 400);
       }
@@ -57,7 +58,8 @@ export default class ClienteService {
       if (
          !data.cli_nome?.trim() ||
          !data.cli_email?.trim() ||
-         !data.cli_telefone?.trim()
+         !data.cli_telefone?.trim() ||
+         !data.usu_id
       ) {
          throw new AppError("Insira dados validos", 400);
       }

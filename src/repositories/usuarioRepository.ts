@@ -12,6 +12,13 @@ export default class UsuarioRepository {
             usu_email: data.usu_email,
             usu_senha: data.usu_senha,
             pap_id: data.pap_id,
+            cliente: {
+               create: {
+                  cli_nome: data.usu_nome,
+                  cli_email: data.usu_email,
+                  cli_telefone: data.usu_tell,
+               },
+            },
          },
       });
 
@@ -20,9 +27,14 @@ export default class UsuarioRepository {
 
    async listUsers(): Promise<Usuario[]> {
       const list: Usuario[] = await this.prisma.usuario.findMany({
-         include:{
+         include: {
             papel: true,
-         }
+            cliente: {
+               include: {
+                  pet: true,
+               },
+            },
+         },
       });
 
       return list;
@@ -53,8 +65,13 @@ export default class UsuarioRepository {
       const findedUser: Usuario | null = await this.prisma.usuario.findUnique({
          where: { usu_id },
          include: {
-            papel: true
-         }
+            papel: true,
+            cliente: {
+               include: {
+                  pet: true,
+               },
+            },
+         },
       });
 
       return findedUser;
@@ -65,6 +82,11 @@ export default class UsuarioRepository {
          where: { usu_email },
          include: {
             papel: true,
+            cliente: {
+               include: {
+                  pet: true,
+               },
+            },
          },
       });
 
@@ -73,13 +95,13 @@ export default class UsuarioRepository {
 
    async validateUser(
       usu_email: string,
-      usu_senha: string
+      usu_senha: string,
    ): Promise<Usuario | null> {
       const user: Usuario | null = await this.prisma.usuario.findUnique({
          where: { usu_email },
          include: {
             papel: true,
-         }
+         },
       });
 
       if (!user) {

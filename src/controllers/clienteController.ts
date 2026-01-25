@@ -11,13 +11,14 @@ export default class ClienteController {
 
    async createCliente(req: Request, res: Response): Promise<Response> {
       try {
-         const { cli_nome, cli_email, cli_telefone } =
+         const { cli_nome, cli_email, cli_telefone, usu_id } =
             req.body as ICreateClienteDTO;
 
          const data: ICreateClienteDTO = {
             cli_nome,
             cli_email,
             cli_telefone,
+            usu_id,
          };
 
          const createdClient: Cliente = await this.cServ.createCliente(data);
@@ -52,19 +53,22 @@ export default class ClienteController {
 
    async updateClient(req: Request, res: Response): Promise<Response> {
       try {
-         const {cli_id, cli_email, cli_nome, cli_telefone} = req.body as IUpdateClienteDTO;
-         
+         const { cli_id, cli_email, cli_nome, cli_telefone, usu_id } =
+            req.body as IUpdateClienteDTO;
+
          const data: IUpdateClienteDTO = {
             cli_id,
             cli_email,
             cli_nome,
             cli_telefone,
-         }
+            usu_id,
+         };
 
          const updatedClient: Cliente = await this.cServ.updateClient(data);
 
-         return res.status(200).json({msg: "Dados do cliente atualizados", data: updatedClient});
-
+         return res
+            .status(200)
+            .json({ msg: "Dados do cliente atualizados", data: updatedClient });
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {
@@ -77,13 +81,14 @@ export default class ClienteController {
 
    async deleteClient(req: Request, res: Response): Promise<Response> {
       try {
-         const {id} = req.params;
+         const { id } = req.params;
          const parsedId: number = parseInt(id);
 
          const deletedClient: Cliente = await this.cServ.deleteClient(parsedId);
 
-         return res.status(200).json({msg: "Cliente deletado", data: deletedClient});
-
+         return res
+            .status(200)
+            .json({ msg: "Cliente deletado", data: deletedClient });
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {

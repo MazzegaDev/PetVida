@@ -52,6 +52,7 @@ const doc = {
             usu_nome: "Nome",
             usu_email: "nome@email.com",
             usu_senha: "senha123",
+            usu_tell: "(00) 0000-0000",
             pap_id: 1,
          },
          usuarioAlter: {

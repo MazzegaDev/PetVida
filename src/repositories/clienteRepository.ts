@@ -11,6 +11,9 @@ export default class ClienteRepository {
             cli_nome: data.cli_nome,
             cli_email: data.cli_email,
             cli_telefone: data.cli_telefone,
+            usuario: {
+               connect: { usu_id: data.usu_id },
+            },
          },
       });
 
@@ -18,7 +21,16 @@ export default class ClienteRepository {
    }
 
    async listClients(): Promise<Cliente[]> {
-      const list: Cliente[] = await this.prisma.cliente.findMany();
+      const list: Cliente[] = await this.prisma.cliente.findMany({
+         include: {
+            pet: {
+               include: {
+                  raca: true,
+                  especie: true,
+               },
+            },
+         },
+      });
 
       return list;
    }
@@ -48,7 +60,7 @@ export default class ClienteRepository {
       const findedClient: Cliente | null = await this.prisma.cliente.findUnique(
          {
             where: { cli_id: id },
-         }
+         },
       );
 
       return findedClient;
@@ -58,9 +70,23 @@ export default class ClienteRepository {
       const findedClient: Cliente | null = await this.prisma.cliente.findUnique(
          {
             where: { cli_email: email },
-         }
+         },
       );
 
       return findedClient;
+   }
+
+   async findByUser(id: number): Promise<Cliente | null> {
+      return await this.prisma.cliente.findUnique({
+         where: { usu_id: id },
+         include: {
+            pet: {
+               include: {
+                  raca: true,
+                  especie: true,
+               },
+            },
+         },
+      });
    }
 }
