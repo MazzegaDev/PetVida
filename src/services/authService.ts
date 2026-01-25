@@ -1,13 +1,16 @@
 import AppError from "../errors/error";
-import { Usuario } from "../generated/prisma/client";
+import { Papel, Usuario } from "../generated/prisma/client";
 import { ILoginDTO, IPayloadDTO } from "../interfaces/loginDTO";
 import UsuarioRepository from "../repositories/usuarioRepository";
+import PapelRepository from "../repositories/papelRepository";
 import { jwtSingIn } from "../utils/jwt";
 
 export default class AuthService {
    readonly uRepo: UsuarioRepository;
+   readonly pRepo: PapelRepository;
    constructor() {
       this.uRepo = new UsuarioRepository();
+      this.pRepo = new PapelRepository();
    }
 
    async login(data: ILoginDTO): Promise<IPayloadDTO> {
@@ -18,6 +21,13 @@ export default class AuthService {
       if (!findedUser) {
          throw new AppError("Usuario não encontrado", 404);
       }
+
+      const userRoler: Papel | null = await this.pRepo.findById(findedUser.pap_id);
+
+      if(!userRoler){
+         throw new AppError("Papel não encontrado", 404);
+      }
+
 
       const givenPass: string = data.usu_senha;
       const oldPass: string = findedUser.usu_senha;
@@ -30,6 +40,7 @@ export default class AuthService {
          usu_id: findedUser.usu_id,
          usu_nome: findedUser.usu_nome,
          usu_email: findedUser.usu_email,
+         user_role: userRoler.pap_tipo,
          pap_id: findedUser.pap_id,
       });
 

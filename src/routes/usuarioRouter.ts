@@ -5,10 +5,13 @@ import { validateAuth, validateAuthAdm } from "../middleware/authMiddleware";
 const router = Router();
 const controller = new UsuarioController();
 
-router.post("/cadastrarUsuario", (req, res) => {
+router.post("/cadastrarUsuario", validateAuthAdm,(req, res) => {
    // #swagger.tags = ['Usuario']
-   // #swagger.summary = 'Cadastra um usuario'
-
+   // #swagger.summary = 'Cadastra um usuario com privilegios de adm'
+   /* #swagger.security = [{
+        "bearerAuth": []
+    }]
+    */
    /*
         #swagger.requestBody = {
             required: true,
@@ -21,8 +24,9 @@ router.post("/cadastrarUsuario", (req, res) => {
             }
         }
    */
-   controller.createUser(req, res);
+   controller.createUserADM(req, res);
 });
+
 
 router.get("/listarUsuarios", validateAuthAdm,(req, res) => {
    // #swagger.tags = ['Usuario']

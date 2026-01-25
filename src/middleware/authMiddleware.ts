@@ -21,6 +21,7 @@ export function validateAuth(
          usu_id: payload.usu_id,
          usu_email: payload.usu_email,
          usu_nome: payload.usu_nome,
+         user_role: payload.user_role,
          pap_id: payload.pap_id,
       };
 
@@ -48,14 +49,12 @@ export async function validateAuthAdm(
          usu_id: payload.usu_id,
          usu_email: payload.usu_email,
          usu_nome: payload.usu_nome,
+         user_role: payload.user_role,
          pap_id: payload.pap_id,
       };
 
-      const pRepo: PapelRepository = new PapelRepository();
-      const isAdm = await pRepo.findById(payload.pap_id);
-
-      if(isAdm?.pap_tipo !== "adm"){
-         return res.status(401).json({msg: "Acesso restrito"})
+      if (payload.user_role != "adm") {
+         return res.status(401).json({ msg: "Acesso restrito" });
       }
 
       next();

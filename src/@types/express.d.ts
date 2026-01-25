@@ -6,6 +6,7 @@ declare module "express-serve-static-core" {
          usu_id: number;
          usu_nome: string;
          usu_email: string;
+         user_role: string;
          pap_id: number;
       };
    }

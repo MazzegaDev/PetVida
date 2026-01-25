@@ -41,16 +41,24 @@
         "tags": [
           "Usuario"
         ],
-        "summary": "Cadastra um usuario",
+        "summary": "Cadastra um usuario com privilegios de adm",
         "description": "",
         "responses": {
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1598,6 +1606,33 @@
         }
       }
     },
+    "/login/cadastrarUsuario": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "Cria um usuario",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarioCliente"
+              }
+            }
+          }
+        }
+      }
+    },
     "/login/logout": {
       "post": {
         "description": "",
@@ -1745,14 +1780,27 @@
           "usu_senha": {
             "type": "string",
             "example": "senha123"
+          }
+        }
+      },
+      "usuarioCliente": {
+        "type": "object",
+        "properties": {
+          "usu_nome": {
+            "type": "string",
+            "example": "Nome"
+          },
+          "usu_email": {
+            "type": "string",
+            "example": "nome@email.com"
+          },
+          "usu_senha": {
+            "type": "string",
+            "example": "senha123"
           },
           "usu_tell": {
             "type": "string",
             "example": "(00) 0000-0000"
-          },
-          "pap_id": {
-            "type": "number",
-            "example": 1
           }
         }
       },

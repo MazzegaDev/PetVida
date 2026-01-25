@@ -1,9 +1,22 @@
 import { Usuario } from "../generated/prisma/client";
 import { Prisma } from "../database/database";
-import { ICreateUsuarioDTO, IUpdateUsuarioDTO } from "../interfaces/usuarioDTO";
+import { ICreateUsuarioDTO, ICreateUsuarioADMDTO,IUpdateUsuarioDTO } from "../interfaces/usuarioDTO";
 
 export default class UsuarioRepository {
    readonly prisma = Prisma;
+
+   async createUserADM(data: ICreateUsuarioADMDTO): Promise<Usuario> {
+      const created: Usuario = await this.prisma.usuario.create({
+         data: {
+            usu_nome: data.usu_nome,
+            usu_email: data.usu_email,
+            usu_senha: data.usu_senha,
+            pap_id: data.pap_id || 1,
+         },
+      });
+
+      return created;
+   }
 
    async createUser(data: ICreateUsuarioDTO): Promise<Usuario> {
       const created: Usuario = await this.prisma.usuario.create({
@@ -11,7 +24,7 @@ export default class UsuarioRepository {
             usu_nome: data.usu_nome,
             usu_email: data.usu_email,
             usu_senha: data.usu_senha,
-            pap_id: data.pap_id,
+            pap_id: data.pap_id || 2,
             cliente: {
                create: {
                   cli_nome: data.usu_nome,

@@ -1,4 +1,4 @@
-import { ICreateUsuarioDTO, IUpdateUsuarioDTO } from "../interfaces/usuarioDTO";
+import { ICreateUsuarioDTO, ICreateUsuarioADMDTO,IUpdateUsuarioDTO } from "../interfaces/usuarioDTO";
 import { Usuario } from "../generated/prisma/client";
 import UsuarioRepository from "../repositories/usuarioRepository";
 import AppError from "../errors/error";
@@ -10,16 +10,37 @@ export default class UsuarioService {
       this.uRepo = new UsuarioRepository();
    }
 
+   async createUserADM(data: ICreateUsuarioADMDTO): Promise<Usuario> {
+      if (
+         !data.usu_nome.trim() ||
+         !data.usu_email.trim() ||
+         !data.usu_senha.trim() 
+      ) {
+         throw new AppError("Insira dados validos", 400);
+      }
+
+      data.pap_id = 1;
+
+      const newUser: Usuario = await this.uRepo.createUserADM(data);
+
+      if (!newUser) {
+         throw new AppError("Não foi possivel criar o novo usuario", 500);
+      }
+
+      return newUser;
+   }
+
    async createUser(data: ICreateUsuarioDTO): Promise<Usuario> {
       if (
          !data.usu_nome.trim() ||
          !data.usu_email.trim() ||
          !data.usu_senha.trim() ||
-         !data.usu_tell.trim() ||
-         !data.pap_id
+         !data.usu_tell.trim()
       ) {
          throw new AppError("Insira dados validos", 400);
       }
+
+      data.pap_id = 2;
 
       const newUser: Usuario = await this.uRepo.createUser(data);
 
