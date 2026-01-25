@@ -14,9 +14,9 @@
     "/cargo/funcoes": {
       "get": {
         "tags": [
-          "Papel"
+          "Cargo"
         ],
-        "summary": "Lista todos os papeis no sistema",
+        "summary": "Lista todos os cargos no sistema",
         "description": "",
         "responses": {
           "200": {
