@@ -1635,12 +1635,41 @@
     },
     "/login/logout": {
       "post": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "Efetua logout",
         "description": "",
         "responses": {
           "204": {
             "description": "No Content"
           }
         }
+      }
+    },
+    "/login/usuarioLogado": {
+      "get": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "Retorna o usuario atualmente logado",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     }
   },

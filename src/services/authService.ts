@@ -44,6 +44,7 @@ export default class AuthService {
          pap_id: findedUser.pap_id,
       });
 
+
       const payload: IPayloadDTO = {
          usu_id: findedUser.usu_id,
          usu_nome: findedUser.usu_nome,
