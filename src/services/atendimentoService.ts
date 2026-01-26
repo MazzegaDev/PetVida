@@ -40,7 +40,7 @@ export default class AtendimentoService {
 
       for (const serId of data.ser_id) {
          const servFinded: Servico | null = await this.sRepo.findById(serId);
-         
+
          if (!servFinded) {
             throw new AppError("Serviço não encontrado", 404);
          }
@@ -97,8 +97,11 @@ export default class AtendimentoService {
 
       const updated: Atendimento = await this.aRepo.changeStatus(data);
 
-      if(!updated){
-         throw new AppError("Não foi possivel mudar o staus do atendimento", 500)
+      if (!updated) {
+         throw new AppError(
+            "Não foi possivel mudar o staus do atendimento",
+            500,
+         );
       }
 
       return updated;
