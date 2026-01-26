@@ -5,6 +5,7 @@ import {
    ICreateAtendimentoDTO,
    AtendimentoParamsDTO,
    IUpdateStatusDTO,
+   IAtendimentoList,
 } from "../interfaces/atendimentoDTO";
 
 export default class AtendimentoController {
@@ -39,7 +40,7 @@ export default class AtendimentoController {
 
    async listAtendimento(req: Request, res: Response): Promise<Response> {
       try {
-         const list: Atendimento[] = await this.aServ.listAtendimentos();
+         const list: IAtendimentoList[] = await this.aServ.listAtendimentos();
 
          return res.status(200).json(list);
       } catch (error: any) {
@@ -57,7 +58,7 @@ export default class AtendimentoController {
          const { id } = req.params;
          const parsedId = parseInt(id);
 
-         const finded: Atendimento = await this.aServ.findById(parsedId);
+         const finded: IAtendimentoList = await this.aServ.findById(parsedId);
 
          return res.status(200).json(finded);
       } catch (error: any) {
@@ -70,21 +71,25 @@ export default class AtendimentoController {
       }
    }
 
-   async changeStatus(req: Request, res: Response): Promise<Response>{
+   async changeStatus(req: Request, res: Response): Promise<Response> {
       try {
-         const {ate_id, ate_status} = req.body as IUpdateStatusDTO;
+         const { ate_id, ate_status } = req.body as IUpdateStatusDTO;
 
          const data: IUpdateStatusDTO = {
             ate_id,
             ate_status,
-         }
+         };
 
          const previous: Atendimento | null = await this.aServ.findById(ate_id);
 
          const updated: Atendimento = await this.aServ.changeStatus(data);
 
-         return res.status(200).json({msg: `Status do atendimento alterado: de ${previous.ate_status} para ${updated.ate_status}`, data: updated})
-
+         return res
+            .status(200)
+            .json({
+               msg: `Status do atendimento alterado: de ${previous.ate_status} para ${updated.ate_status}`,
+               data: updated,
+            });
       } catch (error: any) {
          console.log(error);
          if (error.statusCode) {

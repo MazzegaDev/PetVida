@@ -2,6 +2,7 @@ import {
    AtendimentoParamsDTO,
    ICreateAtendimentoDTO,
    IUpdateStatusDTO,
+   IAtendimentoList,
 } from "../interfaces/atendimentoDTO";
 import { Atendimento, Pets, Servico } from "../generated/prisma/client";
 import AppError from "../errors/error";
@@ -68,8 +69,8 @@ export default class AtendimentoService {
       return newAtendimento;
    }
 
-   async listAtendimentos(): Promise<Atendimento[]> {
-      const list: Atendimento[] = await this.aRepo.listAtendimento();
+   async listAtendimentos(): Promise<IAtendimentoList[]> {
+      const list: IAtendimentoList[] = await this.aRepo.listAtendimento();
 
       if (list.length === 0) {
          throw new AppError("Nenhum atendimento para listar", 404);
@@ -78,8 +79,8 @@ export default class AtendimentoService {
       return list;
    }
 
-   async findById(id: number): Promise<Atendimento> {
-      const finded: Atendimento | null = await this.aRepo.findById(id);
+   async findById(id: number): Promise<IAtendimentoList> {
+      const finded: IAtendimentoList | null = await this.aRepo.findById(id);
 
       if (!finded) {
          throw new AppError("Atendimento não encontrado", 404);
@@ -89,7 +90,9 @@ export default class AtendimentoService {
    }
 
    async changeStatus(data: IUpdateStatusDTO): Promise<Atendimento> {
-      const finded: Atendimento | null = await this.aRepo.findById(data.ate_id);
+      const finded: IAtendimentoList | null = await this.aRepo.findById(
+         data.ate_id,
+      );
 
       if (!finded) {
          throw new AppError("Atendimento não encontrado", 404);

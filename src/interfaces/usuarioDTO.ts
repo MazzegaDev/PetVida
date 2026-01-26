@@ -1,3 +1,4 @@
+import { Prisma } from "../generated/prisma/client";
 export interface ICreateUsuarioDTO {
    usu_nome: string;
    usu_email: string;
@@ -13,8 +14,6 @@ export interface ICreateUsuarioADMDTO {
    pap_id?: number;
 }
 
-
-
 export interface IUpdateUsuarioDTO {
    usu_id: number;
    usu_nome?: string;
@@ -24,3 +23,13 @@ export interface IUpdateUsuarioDTO {
    pap_id?: number;
 }
 
+export type TUsuarioList = Prisma.UsuarioGetPayload<{
+   include: {
+      papel: true;
+      cliente: {
+         include: {
+            pet: true;
+         };
+      };
+   };
+}>;

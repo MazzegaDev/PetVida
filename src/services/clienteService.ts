@@ -1,4 +1,8 @@
-import { ICreateClienteDTO, IUpdateClienteDTO } from "../interfaces/clienteDTO";
+import {
+   ICreateClienteDTO,
+   IUpdateClienteDTO,
+   TClienteList,
+} from "../interfaces/clienteDTO";
 import { Cliente } from "../generated/prisma/client";
 import ClienteRepository from "../repositories/clienteRepository";
 import AppError from "../errors/error";
@@ -36,8 +40,8 @@ export default class ClienteService {
       return createdClient;
    }
 
-   async listClients(): Promise<Cliente[]> {
-      const list: Cliente[] = await this.cRepo.listClients();
+   async listClients(): Promise<TClienteList[]> {
+      const list: TClienteList[] = await this.cRepo.listClients();
 
       if (list.length === 0) {
          throw new AppError("nenhum cliente para listar", 404);
@@ -47,7 +51,7 @@ export default class ClienteService {
    }
 
    async updateClient(data: IUpdateClienteDTO): Promise<Cliente> {
-      const findedClient: Cliente | null = await this.cRepo.findById(
+      const findedClient: TClienteList | null = await this.cRepo.findById(
          data.cli_id,
       );
 
@@ -74,7 +78,7 @@ export default class ClienteService {
    }
 
    async deleteClient(id: number): Promise<Cliente> {
-      const findedClient: Cliente | null = await this.cRepo.findById(id);
+      const findedClient: TClienteList | null = await this.cRepo.findById(id);
 
       if (!findedClient) {
          throw new AppError("Cliente não encontrado", 404);
@@ -85,12 +89,12 @@ export default class ClienteService {
       if (!deletedClient) {
          throw new AppError("Não foi possivel deletar o cliente", 500);
       }
-      
+
       return deletedClient;
    }
 
-   async findById(id: number): Promise<Cliente> {
-      const findedClient: Cliente | null = await this.cRepo.findById(id);
+   async findById(id: number): Promise<TClienteList> {
+      const findedClient: TClienteList | null = await this.cRepo.findById(id);
 
       if (!findedClient) {
          throw new AppError("Cliente não encontrado", 404);
@@ -99,8 +103,9 @@ export default class ClienteService {
       return findedClient;
    }
 
-   async findByEmail(email: string): Promise<Cliente> {
-      const findedClient: Cliente | null = await this.cRepo.findByEmail(email);
+   async findByEmail(email: string): Promise<TClienteList> {
+      const findedClient: TClienteList | null =
+         await this.cRepo.findByEmail(email);
 
       if (!findedClient) {
          throw new AppError("Cliente não encontrado", 404);

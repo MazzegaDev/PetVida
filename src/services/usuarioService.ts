@@ -1,4 +1,4 @@
-import { ICreateUsuarioDTO, ICreateUsuarioADMDTO,IUpdateUsuarioDTO } from "../interfaces/usuarioDTO";
+import { ICreateUsuarioDTO, ICreateUsuarioADMDTO,IUpdateUsuarioDTO, TUsuarioList } from "../interfaces/usuarioDTO";
 import { Usuario } from "../generated/prisma/client";
 import UsuarioRepository from "../repositories/usuarioRepository";
 import AppError from "../errors/error";
@@ -14,7 +14,7 @@ export default class UsuarioService {
       if (
          !data.usu_nome.trim() ||
          !data.usu_email.trim() ||
-         !data.usu_senha.trim() 
+         !data.usu_senha.trim()
       ) {
          throw new AppError("Insira dados validos", 400);
       }
@@ -51,8 +51,8 @@ export default class UsuarioService {
       return newUser;
    }
 
-   async listUsers(): Promise<Usuario[]> {
-      const list: Usuario[] = await this.uRepo.listUsers();
+   async listUsers(): Promise<TUsuarioList[]> {
+      const list: TUsuarioList[] = await this.uRepo.listUsers();
 
       if (list.length === 0) {
          throw new AppError("Nenhum usuario para listar", 404);
@@ -71,7 +71,9 @@ export default class UsuarioService {
          throw new AppError("Insira dados validos", 400);
       }
 
-      const findedUser: Usuario | null = await this.uRepo.findById(data.usu_id);
+      const findedUser: TUsuarioList | null = await this.uRepo.findById(
+         data.usu_id,
+      );
 
       if (!findedUser) {
          throw new AppError("Usuario não encontrado", 404);
@@ -90,7 +92,7 @@ export default class UsuarioService {
    }
 
    async deleteUser(id: number): Promise<Usuario> {
-      const findedUser: Usuario | null = await this.uRepo.findById(id);
+      const findedUser: TUsuarioList | null = await this.uRepo.findById(id);
 
       if (!findedUser) {
          throw new AppError("Usuario não encontrado", 404);
@@ -105,8 +107,8 @@ export default class UsuarioService {
       return deletedUser;
    }
 
-   async findById(id: number): Promise<Usuario> {
-      const findedUser: Usuario | null = await this.uRepo.findById(id);
+   async findById(id: number): Promise<TUsuarioList> {
+      const findedUser: TUsuarioList | null = await this.uRepo.findById(id);
 
       if (!findedUser) {
          throw new AppError("Usuario não encontrado", 404);
@@ -115,8 +117,9 @@ export default class UsuarioService {
       return findedUser;
    }
 
-   async findByEmail(email: string): Promise<Usuario> {
-      const findedUser: Usuario | null = await this.uRepo.findByEmail(email);
+   async findByEmail(email: string): Promise<TUsuarioList> {
+      const findedUser: TUsuarioList | null =
+         await this.uRepo.findByEmail(email);
 
       if (!findedUser) {
          throw new AppError("Usuario não encontrado", 404);

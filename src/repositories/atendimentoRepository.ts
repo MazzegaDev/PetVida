@@ -1,6 +1,7 @@
 import {
    ICreateAtendimentoDTO,
    IUpdateStatusDTO,
+   IAtendimentoList,
 } from "../interfaces/atendimentoDTO";
 import { Prisma } from "../database/database";
 import { Atendimento } from "../generated/prisma/client";
@@ -31,27 +32,32 @@ export default class AtendimentoRepository {
       });
    }
 
-   async listAtendimento(): Promise<Atendimento[]> {
+   async listAtendimento(): Promise<IAtendimentoList[]> {
       return await this.prisma.atendimento.findMany({
          include: {
             pets: {
                include: {
                   especie: true,
                   raca: true,
-               }
+               },
             },
             servico: true,
          },
       });
    }
 
-   async findById(id: number): Promise<Atendimento | null> {
+   async findById(id: number): Promise<IAtendimentoList | null> {
       return await this.prisma.atendimento.findUnique({
          where: {
             ate_id: id,
          },
          include: {
-            pets: true,
+            pets: {
+               include: {
+                  especie: true,
+                  raca: true,
+               },
+            },
             servico: true,
          },
       });

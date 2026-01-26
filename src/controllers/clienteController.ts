@@ -1,4 +1,4 @@
-import { ICreateClienteDTO, IUpdateClienteDTO } from "../interfaces/clienteDTO";
+import { ICreateClienteDTO, IUpdateClienteDTO,TClienteList } from "../interfaces/clienteDTO";
 import { Request, Response } from "express";
 import { Cliente } from "../generated/prisma/client";
 import ClienteService from "../services/clienteService";
@@ -38,7 +38,7 @@ export default class ClienteController {
 
    async listClients(req: Request, res: Response): Promise<Response> {
       try {
-         const list: Cliente[] = await this.cServ.listClients();
+         const list: TClienteList[] = await this.cServ.listClients();
 
          return res.status(200).json(list);
       } catch (error: any) {
@@ -104,7 +104,7 @@ export default class ClienteController {
          const { id } = req.params;
          const parsedId: number = parseInt(id);
 
-         const findedClient: Cliente = await this.cServ.findById(parsedId);
+         const findedClient: TClienteList = await this.cServ.findById(parsedId);
 
          return res.status(200).json(findedClient);
       } catch (error: any) {
@@ -121,7 +121,7 @@ export default class ClienteController {
       try {
          const { email } = req.params;
 
-         const findedClient: Cliente = await this.cServ.findByEmail(email);
+         const findedClient: TClienteList = await this.cServ.findByEmail(email);
 
          return res.status(200).json(findedClient);
       } catch (error: any) {

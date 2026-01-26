@@ -1,4 +1,4 @@
-import { ICreateClienteDTO, IUpdateClienteDTO } from "../interfaces/clienteDTO";
+import { ICreateClienteDTO, IUpdateClienteDTO, TClienteList } from "../interfaces/clienteDTO";
 import { Prisma } from "../database/database";
 import { Cliente } from "../generated/prisma/client";
 
@@ -20,8 +20,8 @@ export default class ClienteRepository {
       return created;
    }
 
-   async listClients(): Promise<Cliente[]> {
-      const list: Cliente[] = await this.prisma.cliente.findMany({
+   async listClients(): Promise<TClienteList[]> {
+      const list: TClienteList[] = await this.prisma.cliente.findMany({
          include: {
             pet: {
                include: {
@@ -56,27 +56,41 @@ export default class ClienteRepository {
       return deleted;
    }
 
-   async findById(id: number): Promise<Cliente | null> {
-      const findedClient: Cliente | null = await this.prisma.cliente.findUnique(
-         {
+   async findById(id: number): Promise<TClienteList | null> {
+      const findedClient: TClienteList | null =
+         await this.prisma.cliente.findUnique({
             where: { cli_id: id },
-         },
-      );
+            include: {
+               pet: {
+                  include: {
+                     raca: true,
+                     especie: true,
+                  },
+               },
+            },
+         });
 
       return findedClient;
    }
 
-   async findByEmail(email: string): Promise<Cliente | null> {
-      const findedClient: Cliente | null = await this.prisma.cliente.findUnique(
-         {
+   async findByEmail(email: string): Promise<TClienteList | null> {
+      const findedClient: TClienteList | null =
+         await this.prisma.cliente.findUnique({
             where: { cli_email: email },
-         },
-      );
+            include: {
+               pet: {
+                  include: {
+                     raca: true,
+                     especie: true,
+                  },
+               },
+            },
+         });
 
       return findedClient;
    }
 
-   async findByUser(id: number): Promise<Cliente | null> {
+   async findByUser(id: number): Promise<TClienteList | null> {
       return await this.prisma.cliente.findUnique({
          where: { usu_id: id },
          include: {

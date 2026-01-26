@@ -1,6 +1,6 @@
 import { Usuario } from "../generated/prisma/client";
 import { Prisma } from "../database/database";
-import { ICreateUsuarioDTO, ICreateUsuarioADMDTO,IUpdateUsuarioDTO } from "../interfaces/usuarioDTO";
+import { ICreateUsuarioDTO, ICreateUsuarioADMDTO,IUpdateUsuarioDTO, TUsuarioList } from "../interfaces/usuarioDTO";
 
 export default class UsuarioRepository {
    readonly prisma = Prisma;
@@ -38,8 +38,8 @@ export default class UsuarioRepository {
       return created;
    }
 
-   async listUsers(): Promise<Usuario[]> {
-      const list: Usuario[] = await this.prisma.usuario.findMany({
+   async listUsers(): Promise<TUsuarioList[]> {
+      const list: TUsuarioList[] = await this.prisma.usuario.findMany({
          include: {
             papel: true,
             cliente: {
@@ -74,34 +74,36 @@ export default class UsuarioRepository {
       return deletedUser;
    }
 
-   async findById(usu_id: number): Promise<Usuario | null> {
-      const findedUser: Usuario | null = await this.prisma.usuario.findUnique({
-         where: { usu_id },
-         include: {
-            papel: true,
-            cliente: {
-               include: {
-                  pet: true,
+   async findById(usu_id: number): Promise<TUsuarioList | null> {
+      const findedUser: TUsuarioList | null =
+         await this.prisma.usuario.findUnique({
+            where: { usu_id },
+            include: {
+               papel: true,
+               cliente: {
+                  include: {
+                     pet: true,
+                  },
                },
             },
-         },
-      });
+         });
 
       return findedUser;
    }
 
-   async findByEmail(usu_email: string): Promise<Usuario | null> {
-      const findedUser: Usuario | null = await this.prisma.usuario.findUnique({
-         where: { usu_email },
-         include: {
-            papel: true,
-            cliente: {
-               include: {
-                  pet: true,
+   async findByEmail(usu_email: string): Promise<TUsuarioList | null> {
+      const findedUser: TUsuarioList | null =
+         await this.prisma.usuario.findUnique({
+            where: { usu_email },
+            include: {
+               papel: true,
+               cliente: {
+                  include: {
+                     pet: true,
+                  },
                },
             },
-         },
-      });
+         });
 
       return findedUser;
    }

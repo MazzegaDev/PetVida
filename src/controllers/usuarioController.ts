@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ICreateUsuarioDTO, ICreateUsuarioADMDTO,IUpdateUsuarioDTO } from "../interfaces/usuarioDTO";
+import { ICreateUsuarioDTO, ICreateUsuarioADMDTO,IUpdateUsuarioDTO,TUsuarioList } from "../interfaces/usuarioDTO";
 import UsuarioService from "../services/usuarioService";
 import { Usuario } from "../generated/prisma/client";
 
@@ -63,7 +63,7 @@ export default class UsuarioController {
 
    async listUsers(req: Request, res: Response): Promise<Response> {
       try {
-         const list: Usuario[] = await this.uServ.listUsers();
+         const list: TUsuarioList[] = await this.uServ.listUsers();
 
          return res.status(200).json(list);
       } catch (error: any) {
@@ -128,7 +128,7 @@ export default class UsuarioController {
          const { id } = req.params;
          const parsedId = parseInt(id);
 
-         const findedUser: Usuario = await this.uServ.findById(parsedId);
+         const findedUser: TUsuarioList = await this.uServ.findById(parsedId);
 
          return res.status(200).json(findedUser);
       } catch (error: any) {
@@ -145,7 +145,7 @@ export default class UsuarioController {
       try {
          const { email } = req.params;
 
-         const findedUser: Usuario = await this.uServ.findByEmail(email);
+         const findedUser: TUsuarioList = await this.uServ.findByEmail(email);
 
          return res.status(200).json(findedUser);
       } catch (error: any) {
