@@ -1,3 +1,5 @@
+import { Prisma } from "../generated/prisma/client";
+
 export interface ICreatePetDTO {
    pet_nome: string;
    pet_idade: number;
@@ -14,3 +16,12 @@ export interface IUpdatePetDTO {
    esp_id?: number;
    rac_id?: number;
 }
+
+
+export type TPetList = Prisma.PetsGetPayload<{
+   include: {
+      cliente: true,
+      especie: true,
+      raca: true
+   }
+}>

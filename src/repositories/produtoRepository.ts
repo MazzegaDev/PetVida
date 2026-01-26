@@ -64,7 +64,6 @@ export default class ProdutoRepository {
       return updatedStock;
    }
 
-   
    async findLowStock(): Promise<Produto[]> {
       return await this.prisma.produto.findMany({
          where: {

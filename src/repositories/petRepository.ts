@@ -1,6 +1,6 @@
-import { ICreatePetDTO, IUpdatePetDTO } from "../interfaces/petDTO";
+import { ICreatePetDTO, IUpdatePetDTO,TPetList } from "../interfaces/petDTO";
 import { Prisma } from "../database/database";
-import { Pets } from "../generated/prisma/client";
+import { Pets, Cliente, Raca, Especie } from "../generated/prisma/client";
 
 export default class PetRepository {
    readonly prisma = Prisma;
@@ -23,7 +23,7 @@ export default class PetRepository {
       });
    }
 
-   async listPets(): Promise<Pets[]> {
+   async listPets(): Promise<TPetList[]> {
       return this.prisma.pets.findMany({
          include: {
             cliente: true,
@@ -62,7 +62,7 @@ export default class PetRepository {
       });
    }
 
-   async findByRaca(id: number): Promise<Pets[]> {
+   async findByRaca(id: number): Promise<TPetList[]> {
       return await this.prisma.pets.findMany({
          where: { rac_id: id },
          include: {
@@ -73,7 +73,7 @@ export default class PetRepository {
       });
    }
 
-   async findByEspecie(id: number): Promise<Pets[]> {
+   async findByEspecie(id: number): Promise<TPetList[]> {
       return await this.prisma.pets.findMany({
          where: { esp_id: id },
          include: {
@@ -84,7 +84,7 @@ export default class PetRepository {
       });
    }
 
-   async findByClient(id: number): Promise<Pets[]> {
+   async findByClient(id: number): Promise<TPetList[]> {
       return await this.prisma.pets.findMany({
          where: { cli_id: id },
          include: {
@@ -95,7 +95,7 @@ export default class PetRepository {
       });
    }
 
-   async findById(id: number): Promise<Pets | null> {
+   async findById(id: number): Promise<TPetList | null> {
       return await this.prisma.pets.findUnique({
          where: {
             pet_id: id,

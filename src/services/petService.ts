@@ -1,4 +1,4 @@
-import { ICreatePetDTO, IUpdatePetDTO } from "../interfaces/petDTO";
+import { ICreatePetDTO, IUpdatePetDTO, TPetList } from "../interfaces/petDTO";
 import { Pets, Raca, Cliente, Especie } from "../generated/prisma/client";
 import PetRepository from "../repositories/petRepository";
 import RacaRepository from "../repositories/racaRepository";
@@ -57,8 +57,8 @@ export default class PetService {
       return createdPet;
    }
 
-   async listPets(): Promise<Pets[]> {
-      const list: Pets[] = await this.pRepo.listPets();
+   async listPets(): Promise<TPetList[]> {
+      const list: TPetList[] = await this.pRepo.listPets();
 
       if (list.length === 0) {
          throw new AppError("Nenhum pet para listar", 404);
@@ -78,7 +78,7 @@ export default class PetService {
          throw new AppError("Insira dados validos", 400);
       }
 
-      const findedPet: Pets | null = await this.pRepo.findById(data.pet_id);
+      const findedPet: TPetList | null = await this.pRepo.findById(data.pet_id);
       if (!findedPet) {
          throw new AppError("Pet não encontrado", 404);
       }
@@ -111,7 +111,7 @@ export default class PetService {
    }
 
    async deletePet(id: number): Promise<Pets> {
-      const findedPet: Pets | null = await this.pRepo.findById(id);
+      const findedPet: TPetList | null = await this.pRepo.findById(id);
       if (!findedPet) {
          throw new AppError("Pet não encontrado", 404);
       }
@@ -125,8 +125,8 @@ export default class PetService {
       return deletedPet;
    }
 
-   async findById(id: number): Promise<Pets> {
-      const findedPet: Pets | null = await this.pRepo.findById(id);
+   async findById(id: number): Promise<TPetList> {
+      const findedPet: TPetList | null = await this.pRepo.findById(id);
       if (!findedPet) {
          throw new AppError("Pet não encontrado", 404);
       }
@@ -134,8 +134,8 @@ export default class PetService {
       return findedPet;
    }
 
-   async findByRaca(id: number): Promise<Pets[]> {
-      const findedPet: Pets[] | null = await this.pRepo.findByRaca(id);
+   async findByRaca(id: number): Promise<TPetList[]> {
+      const findedPet: TPetList[] | null = await this.pRepo.findByRaca(id);
       if (findedPet.length === 0) {
          throw new AppError("Nenhum pet pertence a essa raça", 404);
       }
@@ -143,8 +143,8 @@ export default class PetService {
       return findedPet;
    }
 
-   async findByClient(id: number): Promise<Pets[]> {
-      const findedPet: Pets[] | null = await this.pRepo.findByClient(id);
+   async findByClient(id: number): Promise<TPetList[]> {
+      const findedPet: TPetList[] | null = await this.pRepo.findByClient(id);
       if (findedPet.length === 0) {
          throw new AppError("Nenhum pet pertence a esse cliente", 404);
       }
@@ -152,8 +152,8 @@ export default class PetService {
       return findedPet;
    }
 
-   async findByEspecie(id: number): Promise<Pets[]> {
-      const findedPet: Pets[] | null = await this.pRepo.findByEspecie(id);
+   async findByEspecie(id: number): Promise<PTPetList[]> {
+      const findedPet: TPetList[] | null = await this.pRepo.findByEspecie(id);
       if (findedPet.length === 0) {
          throw new AppError("Nenhum pet pertence a essa especie", 404);
       }
